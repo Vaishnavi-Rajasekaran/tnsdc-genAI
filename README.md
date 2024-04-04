@@ -33,10 +33,4 @@ The trained autoencoder model achieves a high accuracy in reconstructing normal 
 - The MIT-BIH Arrhythmia Database for providing the ECG dataset used in this project.
 - TensorFlow and Keras libraries for building and training neural networks.
 
-## Requirements
 
-All required Python packages are listed in the `requirements.txt` file. You can install them using the following command:
-
-```bash
-pip install -r requirements.txt
-# ECG Anomaly Detection using Autoencoder
