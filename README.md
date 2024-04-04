@@ -1,36 +1,48 @@
 # tnsdc-genAI
 # ECG Anomaly Detection using Autoencoder
 
+This project aims to detect anomalies in electrocardiogram (ECG) signals using an autoencoder neural network. Anomalies in ECG signals can indicate various cardiac arrhythmias and other heart-related conditions. The project utilizes the MIT-BIH Arrhythmia Database for ECG data and implements the anomaly detection system in Python using the `wfdb` library and TensorFlow/Keras.
+
 ## Overview
 
-This project focuses on detecting anomalies in electrocardiogram (ECG) signals using an autoencoder neural network. An autoencoder is a type of artificial neural network used for unsupervised learning. In this project, the autoencoder is trained on normal ECG signals and aims to reconstruct them accurately. Anomalies are then detected by comparing the reconstruction error between normal and abnormal signals.
+### Data Loading and Preprocessing
+- ECG data from the MIT-BIH Arrhythmia Database is loaded using the `wfdb` library.
+- ECG signals are segmented into beats, and annotations for each beat are extracted.
+- Different types of beats are categorized as normal, abnormal, or non-beat based on annotation symbols.
 
-## Dataset
+### Dataset Creation
+- A dataset is created by extracting abnormal beats from the ECG signals.
+- The dataset includes a specified number of seconds before and after each abnormal beat.
+- The dataset is balanced by including normal beats as well.
 
-The dataset used in this project is the MIT-BIH Arrhythmia Database. It consists of ECG recordings from 48 subjects, each containing various types of heartbeats annotated with symbols indicating normal beats and different types of abnormal beats.
+### Data Splitting and Scaling
+- The dataset is split into training and testing sets.
+- Data scaling is performed using MinMaxScaler to scale the data between 0 and 1.
 
-## Project Structure
+### Model Architecture
+- Anomaly detection is performed using an autoencoder neural network.
+- The autoencoder consists of an encoder and a decoder.
+- The encoder compresses the input data into a lower-dimensional representation.
+- The decoder reconstructs the input data from the encoded representation.
 
-- **data_processing.ipynb**: Jupyter Notebook containing code for data preprocessing, including reading ECG signals, extracting beats, and creating datasets for training and testing.
-- **model_training.ipynb**: Jupyter Notebook containing code for building and training the autoencoder model using TensorFlow/Keras.
-- **results_analysis.ipynb**: Jupyter Notebook for analyzing the performance of the trained model and visualizing reconstruction errors.
-- **requirements.txt**: File listing all Python packages required to run the code.
-- **README.md**: This file, providing an overview of the project.
+### Training
+- The autoencoder is trained using the training set, where the input and output are both the normal ECG signals.
+- Validation data, consisting of normal ECG signals, is used to monitor the training process and avoid overfitting.
 
+### Evaluation
+- The trained autoencoder is evaluated on both normal and anomalous (abnormal) ECG signals.
+- Reconstruction errors are calculated as the differences between the input and output signals.
+- The reconstruction errors are visualized to detect anomalies, where higher errors indicate anomalies.
 
-## Usage
+### Visualization
+- Normal and anomalous ECG signals, along with their reconstructions, are plotted to visualize the performance of the autoencoder.
+- The reconstruction errors are visualized to highlight the differences between normal and anomalous signals.
 
-1. **Data Preprocessing**: Run `data_processing.ipynb` to preprocess the ECG data and create datasets for training and testing.
-2. **Model Training**: Execute `model_training.ipynb` to build and train the autoencoder model.
-3. **Results Analysis**: Utilize `results_analysis.ipynb` to evaluate the performance of the trained model and visualize reconstruction errors.
-
-## Results
-
-The trained autoencoder model achieves a high accuracy in reconstructing normal ECG signals. Anomalies are detected based on significant deviations between the original signals and their reconstructions.
-
-## Acknowledgments
-
-- The MIT-BIH Arrhythmia Database for providing the ECG dataset used in this project.
-- TensorFlow and Keras libraries for building and training neural networks.
-
-
+## Requirements
+- Python 3.x
+- TensorFlow 2.x
+- wfdb
+- matplotlib
+- pandas
+- numpy
+- scikit-learn
